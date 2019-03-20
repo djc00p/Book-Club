@@ -15,6 +15,11 @@ RSpec.describe "book index page", type: :feature do
       @review_2 = create(:review, rating: 5, book_id: @book_1.id)
       @review_3 = create(:review, rating: 4, book_id: @book_1.id)
       @review_4 = create(:review, rating: 2, book_id: @book_1.id)
+      @review_5 = create(:review, rating: 5, book_id: @book_2.id)
+      @review_6 = create(:review, rating: 5, book_id: @book_2.id)
+      @review_7 = create(:review, rating: 1, book_id: @book_3.id)
+      @review_8 = create(:review, rating: 3, book_id: @book_3.id)
+      @review_9 = create(:review, rating: 4, book_id: @book_3.id)
     end
     it "shows all book titles" do
       # binding.pry
@@ -46,6 +51,29 @@ RSpec.describe "book index page", type: :feature do
         expect(page).to have_content(@book_1.title)
         expect(page).to have_content("Average Book Rating: 3.5")
         expect(page).to have_content("Total Reviews: 4")
+      end
+    end
+
+    it "shows book statistics" do
+      visit books_path
+
+      within "#highest_rated_books" do
+        expect(page).to have_content("Highest Rated Books")
+        expect(page).to have_content()
+        expect(page).to have_content()
+        expect(page).to have_content()
+      end
+      within "#worst_rated_books" do
+        expect(page).to have_content("Worst Rated Books")
+        expect(page).to have_content()
+        expect(page).to have_content()
+        expect(page).to have_content()
+      end
+      within "#users_with_most_reviews" do
+        expect(page).to have_content("User With Most Reviews")
+        expect(page).to have_content()
+        expect(page).to have_content()
+        expect(page).to have_content()
       end
     end
   end

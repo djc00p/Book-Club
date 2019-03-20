@@ -1,5 +1,13 @@
 <% @books.each do |book| %>
-
+<section id="highest_rated_books">
+  <h1>Highest Rated Books</h1>
+</section>
+<section id="worst_rated_books">
+<h1>Worst Rated Books</h1>
+</section>
+<section id="users_with_most_reviews">
+<h1>User With Most Reviews</h1>
+</section>
 <ul id="info-<%= book.id%>">
   <li><%= book.title %></li>
   <li>Average Book Rating: <%= book.avg_rating(book) %></li>
