@@ -54,7 +54,7 @@ RSpec.describe "book index page", type: :feature do
       end
     end
 
-    it "shows book statistics" do
+    xit "shows book statistics" do
       visit books_path
 
       within "#highest_rated_books" do
