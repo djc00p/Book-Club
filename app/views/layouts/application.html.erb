@@ -7,7 +7,10 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-
+  <nav class="navbar">
+    <%= link_to "Welcome page", root_path %>
+    <%= link_to "Books", books_path %>
+  </nav>
   <body>
     <%= yield %>
   </body>
