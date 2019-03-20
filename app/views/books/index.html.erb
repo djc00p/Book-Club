@@ -1,0 +1,10 @@
+<% @books.each do |book| %>
+
+<ul class="info-<%= book.id%>">
+  <li><%= book.title %></li>
+  <li><%= book.pages %></li>
+  <li><%= book.year_pub %></li>
+  <li> <img src= "<%= book.image %>"</li>
+  <li><%= book.authors.pluck(:name).join(", ") %></li>
+</ul>
+<% end %>

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :Author do
+  factory :author do
     sequence(:name) {|n| "Name #{n}"}
   end
 end
