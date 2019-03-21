@@ -10,6 +10,21 @@ class Book < ApplicationRecord
 
   def avg_rating(book)
     book.reviews.average(:rating).to_f.round(1)
-    # binding.pry
   end
+
+  def self.rated_books(updown)
+    joins(:reviews)
+    .select("Books.*, AVG(reviews.rating) as average_rating")
+    .group(:id)
+    .order("average_rating #{updown}")
+    .limit(3)
+  end
+
+  # def self.worst_rated_books
+  #   joins(:reviews)
+  #   .select("Books.*, AVG(reviews.rating) as average_rating")
+  #   .group(:id)
+  #   .order("average_rating")
+  #   .limit(3)
+  # end
 end

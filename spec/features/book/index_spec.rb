@@ -12,14 +12,14 @@ RSpec.describe "book index page", type: :feature do
       create(:author_book, author: @author_1, book: @book_3)
       # binding.pry
       @review_1 = create(:review, book_id: @book_1.id)
-      @review_2 = create(:review, rating: 5, book_id: @book_1.id)
+      @review_2 = create(:review, rating: 5, book_id: @book_1.id, user_name: "Jenna")
       @review_3 = create(:review, rating: 4, book_id: @book_1.id)
-      @review_4 = create(:review, rating: 2, book_id: @book_1.id)
+      @review_4 = create(:review, rating: 2, book_id: @book_1.id, user_name: "Jenna")
       @review_5 = create(:review, rating: 5, book_id: @book_2.id)
-      @review_6 = create(:review, rating: 5, book_id: @book_2.id)
+      @review_6 = create(:review, rating: 5, book_id: @book_2.id, user_name: "Jenna")
       @review_7 = create(:review, rating: 1, book_id: @book_3.id)
-      @review_8 = create(:review, rating: 3, book_id: @book_3.id)
-      @review_9 = create(:review, rating: 4, book_id: @book_3.id)
+      @review_8 = create(:review, rating: 3, book_id: @book_3.id, user_name: "Bob")
+      @review_9 = create(:review, rating: 4, book_id: @book_3.id, user_name: "Bob")
     end
     it "shows all book titles" do
       # binding.pry
@@ -59,21 +59,22 @@ RSpec.describe "book index page", type: :feature do
 
       within "#highest_rated_books" do
         expect(page).to have_content("Highest Rated Books")
-        expect(page).to have_content()
-        expect(page).to have_content()
-        expect(page).to have_content()
+        expect(page).to have_content("in flames, 5.0")
+        expect(page).to have_content("In the wind, 3.5")
+        expect(page).to have_content("#{@book_3.title}, 2.7")
       end
       within "#worst_rated_books" do
         expect(page).to have_content("Worst Rated Books")
-        expect(page).to have_content()
-        expect(page).to have_content()
-        expect(page).to have_content()
+        expect(page).to have_content("#{@book_3.title}, 2.7")
+        expect(page).to have_content("In the wind, 3.5")
+        expect(page).to have_content("in flames, 5.0")
       end
       within "#users_with_most_reviews" do
+        # binding.pry
         expect(page).to have_content("User With Most Reviews")
-        expect(page).to have_content()
-        expect(page).to have_content()
-        expect(page).to have_content()
+        expect(page).to have_content("James, 4")
+        expect(page).to have_content("Jenna, 3")
+        expect(page).to have_content("Bob, 2")
       end
     end
   end
