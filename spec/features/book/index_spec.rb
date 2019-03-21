@@ -59,22 +59,22 @@ RSpec.describe "book index page", type: :feature do
 
       within "#highest_rated_books" do
         expect(page).to have_content("Highest Rated Books")
-        expect(page).to have_content()
-        expect(page).to have_content()
-        expect(page).to have_content()
+        expect(page).to have_content("in flames, 5.0")
+        expect(page).to have_content("In the wind, 3.5")
+        expect(page).to have_content("Title 3, 2.7")
       end
-      within "#worst_rated_books" do
-        expect(page).to have_content("Worst Rated Books")
-        expect(page).to have_content()
-        expect(page).to have_content()
-        expect(page).to have_content()
-      end
-      within "#users_with_most_reviews" do
-        expect(page).to have_content("User With Most Reviews")
-        expect(page).to have_content()
-        expect(page).to have_content()
-        expect(page).to have_content()
-      end
+      # within "#worst_rated_books" do
+      #   expect(page).to have_content("Worst Rated Books")
+      #   expect(page).to have_content()
+      #   expect(page).to have_content()
+      #   expect(page).to have_content()
+      # end
+      # within "#users_with_most_reviews" do
+      #   expect(page).to have_content("User With Most Reviews")
+      #   expect(page).to have_content()
+      #   expect(page).to have_content()
+      #   expect(page).to have_content()
+      # end
     end
   end
 end
