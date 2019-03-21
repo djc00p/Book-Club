@@ -12,11 +12,19 @@ class Book < ApplicationRecord
     book.reviews.average(:rating).to_f.round(1)
   end
 
-  def self.highest_rated_books
+  def self.rated_books(updown)
     joins(:reviews)
     .select("Books.*, AVG(reviews.rating) as average_rating")
     .group(:id)
-    .order("average_rating desc")
+    .order("average_rating #{updown}")
     .limit(3)
   end
+
+  # def self.worst_rated_books
+  #   joins(:reviews)
+  #   .select("Books.*, AVG(reviews.rating) as average_rating")
+  #   .group(:id)
+  #   .order("average_rating")
+  #   .limit(3)
+  # end
 end

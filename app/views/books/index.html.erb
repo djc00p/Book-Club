@@ -7,10 +7,19 @@
   </ol>
 </section>
 <section id="worst_rated_books">
-<h1>Worst Rated Books</h1>
+  <h1>Worst Rated Books</h1>
+  <ol>
+    <li><%= @worst_rated_books.first.title %>, <%= @worst_rated_books.first.average_rating.round(1) %></li>
+    <li><%= @worst_rated_books.second.title %>, <%= @worst_rated_books.second.average_rating.round(1) %></li>
+    <li><%= @worst_rated_books.third.title %>, <%= @worst_rated_books.third.average_rating.round(1) %></li>
+  </ol>
 </section>
 <section id="users_with_most_reviews">
-<h1>User With Most Reviews</h1>
+  <h1>User With Most Reviews</h1>
+  <ol>
+    <li><%= @most_ratings.keys[-1]%>, <%= @most_ratings.values[-1] %></li>
+    <li><%= @most_ratings.keys[-2]%>, <%= @most_ratings.values[-2] %></li><li><%= @most_ratings.keys[-3]%>, <%= @most_ratings.values[-3] %></li>
+  </ol>
 </section>
 <% @books.each do |book| %>
 <ul id="info-<%= book.id%>">
