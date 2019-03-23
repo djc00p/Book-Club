@@ -18,10 +18,11 @@ RSpec.describe Book, type: :model do
     before :each do
       # @author_1 = Author.create(name: "Joe")
       @author_1 = create(:author)
+      @author_2 = Author.create(name: "Mary")
       @book_1 = @author_1.books.create(title: "In the wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
       @book_2 = @author_1.books.create(title: "in flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
       @book_3 = create(:book, created_at: 3.days.ago)
-      # @author_1.books << @book_3
+      @author_2.books << @book_1
       create(:author_book, author: @author_1, book: @book_3)
       # binding.pry
       @review_1 = create(:review, book_id: @book_1.id)
@@ -42,13 +43,18 @@ RSpec.describe Book, type: :model do
       direction = :asc
       expect(@book_1.reviews_by_rating(@book_1, "#{direction}")).to eq([@review_4, @review_1, @review_3])
     end
+    it "should list all authors" do
+      expect(@book_1.lists_authors(@book_1)).to eq("#{@author_1.name}, Mary")
+    end
   end
 
   describe "Class Methods" do
     before :each do
       # @author_1 = Author.create(name: "Joe")
       @author_1 = create(:author)
+      @author_2 = Author.create(name: "Mary")
       @book_1 = @author_1.books.create(title: "In the wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
+      @author_2.books << @book_1
       @book_2 = @author_1.books.create(title: "in flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
       @book_3 = create(:book, created_at: 3.days.ago)
       # @author_1.books << @book_3
@@ -91,5 +97,6 @@ RSpec.describe Book, type: :model do
       expect(Book.amount_of_pages(desc)).to eq([@book_2,@book_1,@book_3])
       expect(Book.amount_of_pages(asc)).to eq([@book_3,@book_1,@book_2])
     end
+
   end
 end
