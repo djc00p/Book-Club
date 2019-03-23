@@ -32,7 +32,18 @@ RSpec.describe Book, type: :model do
     it "should calculate average rating" do
       expect(@book_1.avg_rating(@book_1)).to eq(3.5)
     end
+
+    it "should return 3 highest reviews" do
+      direction = :desc
+      expect(@book_1.reviews_by_rating(@book_1, "#{direction}")).to eq([@review_2, @review_3, @review_1])
+    end
+
+    it "should return 3 lowest reviews" do
+      direction = :asc
+      expect(@book_1.reviews_by_rating(@book_1, "#{direction}")).to eq([@review_4, @review_1, @review_3])
+    end
   end
+
   describe "Class Methods" do
     before :each do
       # @author_1 = Author.create(name: "Joe")

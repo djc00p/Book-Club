@@ -6,7 +6,7 @@ class BooksController < ApplicationController
     @highest_rated_books = Book.rated_books(desc)
     @worst_rated_books = Book.rated_books(asc)
     @most_ratings = Review.total_count
-    
+
     case params[:sort]
     when "high_rating"
       @books = @highest_rated_books
@@ -29,5 +29,9 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
+  end
+
+  def show
+    @book = Book.find(params[:id])
   end
 end

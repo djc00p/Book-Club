@@ -1,0 +1,25 @@
+<h1>Top Three Reviews</h1>
+<section  class="show_top_reviews">
+  <% @book.reviews_by_rating(@book, :desc).each do |review| %>
+    <ul>
+      <li><%= review.title %></li>
+      <li>Rating: <%= review.rating %></li>
+      <li>Reviewer: <%= review.user_name %></li>
+    </ul>
+  <% end %>
+</section>
+
+<h1>Bottom Three Reviews</h1>
+<section class="show_bottom_reviews">
+  <% @book.reviews_by_rating(@book, :asc).each do |review| %>
+    <ul>
+      <li><%= review.title %></li>
+      <li>Rating: <%= review.rating %></li>
+      <li>Reviewer: <%= review.user_name %></li>
+    </ul>
+  <% end %>
+</section>
+
+<section class="show_avg_rating">
+  <h1>Average Rating: <%= @book.avg_rating(@book) %>
+</section>
