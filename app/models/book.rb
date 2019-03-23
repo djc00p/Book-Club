@@ -12,6 +12,10 @@ class Book < ApplicationRecord
     book.reviews.average(:rating).to_f.round(1)
   end
 
+  def reviews_by_rating(book, direction)
+    book.reviews.order(rating: direction).limit(3)
+  end
+
   def self.rated_books(updown)
     joins(:reviews)
     .select("Books.*, AVG(reviews.rating) as average_rating")
