@@ -54,7 +54,7 @@ RSpec.describe "book index page", type: :feature do
       end
     end
 
-    xit "shows book statistics" do
+    it "shows book statistics" do
       visit books_path
 
       within "#highest_rated_books" do
@@ -77,5 +77,64 @@ RSpec.describe "book index page", type: :feature do
         expect(page).to have_content("Bob, 2")
       end
     end
+    it "can sort the books" do
+      visit books_path
+
+      expect(page).to have_link("Sort by Highest Rated Book")
+
+      click_link "Sort by Highest Rated Book"
+
+
+      expect(page.all("ul")[0]).to have_content(@book_2.title)
+      expect(page.all("ul")[1]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content(@book_3.title)
+
+      expect(page).to have_link("Sort by Lowest Rated Book")
+
+      click_link "Sort by Lowest Rated Book"
+
+
+      expect(page.all("ul")[0]).to have_content(@book_3.title)
+      expect(page.all("ul")[1]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content(@book_2.title)
+
+      expect(page).to have_link("Sort by Most Amount of Pages")
+
+      click_link "Sort by Most Amount of Pages"
+
+
+      expect(page.all("ul")[0]).to have_content(@book_2.title)
+      expect(page.all("ul")[1]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content(@book_3.title)
+
+      expect(page).to have_link("Sort by Least Amount of Pages")
+
+      click_link "Sort by Least Amount of Pages"
+
+
+      expect(page.all("ul")[0]).to have_content(@book_3.title)
+      expect(page.all("ul")[1]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content(@book_2.title)
+
+      expect(page).to have_link("Sort by Most Amount of Reviews")
+
+      click_link "Sort by Most Amount of Reviews"
+
+
+      expect(page.all("ul")[0]).to have_content(@book_1.title)
+      expect(page.all("ul")[1]).to have_content(@book_3.title)
+      expect(page.all("ul")[2]).to have_content(@book_2.title)
+
+      expect(page).to have_link("Sort by Least Amount of Reviews")
+
+      click_link "Sort by Least Amount of Reviews"
+
+
+      expect(page.all("ul")[0]).to have_content(@book_2.title)
+      expect(page.all("ul")[1]).to have_content(@book_3.title)
+      expect(page.all("ul")[2]).to have_content(@book_1.title)
+    end
   end
 end
+
+# save_and_open_page

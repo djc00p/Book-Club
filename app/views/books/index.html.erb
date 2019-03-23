@@ -1,3 +1,9 @@
+<%= link_to "Sort by Highest Rated Book", books_path(sort: "high_rating") %>
+<%= link_to "Sort by Lowest Rated Book", books_path(sort: "low_rating") %>
+<%= link_to "Sort by Most Amount of Pages", books_path(sort: "most_pages") %>
+<%= link_to "Sort by Least Amount of Pages", books_path(sort: "least_pages") %>
+<%= link_to "Sort by Most Amount of Reviews", books_path(sort: "most_reviews") %>
+<%= link_to "Sort by Least Amount of Reviews", books_path(sort: "least_reviews") %>
 <section id="highest_rated_books">
   <h1>Highest Rated Books</h1>
   <ol>
@@ -16,13 +22,17 @@
 </section>
 <section id="users_with_most_reviews">
   <h1>User With Most Reviews</h1>
-  <ol>
+  <ul>
     <li><%= @most_ratings.keys[-1]%>, <%= @most_ratings.values[-1] %></li>
     <li><%= @most_ratings.keys[-2]%>, <%= @most_ratings.values[-2] %></li><li><%= @most_ratings.keys[-3]%>, <%= @most_ratings.values[-3] %></li>
-  </ol>
+  </ul>
 </section>
+  <% num = 1 %>
 <% @books.each do |book| %>
 <ul id="info-<%= book.id%>">
+  <% %>
+
+  <section class="book_display<% "#{num}"%>">
   <li><%= book.title %></li>
   <li>Average Book Rating: <%= book.avg_rating(book) %></li>
   <li>Total Reviews: <%= book.reviews.count %></li>
@@ -31,4 +41,6 @@
   <li> <img src= "<%= book.image %>"</li>
   <li><%= book.authors.pluck(:name).join(", ") %></li>
 </ul>
+<% num += 1 %>
+</section>
 <% end %>

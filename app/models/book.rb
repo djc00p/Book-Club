@@ -17,14 +17,16 @@ class Book < ApplicationRecord
     .select("Books.*, AVG(reviews.rating) as average_rating")
     .group(:id)
     .order("average_rating #{updown}")
-    .limit(3)
   end
 
-  # def self.worst_rated_books
-  #   joins(:reviews)
-  #   .select("Books.*, AVG(reviews.rating) as average_rating")
-  #   .group(:id)
-  #   .order("average_rating")
-  #   .limit(3)
-  # end
+  def self.amount_of_reviews(updown)
+    joins(:reviews)
+    .select("Books.*, reviews.count as review_count")
+    .group(:id)
+    .order("review_count #{updown}")
+  end
+
+  def self.amount_of_pages(updown)
+    order("pages #{updown}")
+  end
 end
