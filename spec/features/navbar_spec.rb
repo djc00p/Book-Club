@@ -4,7 +4,7 @@ RSpec.describe 'Check for Navbar' do
   it "shows links" do
     visit root_path
     # save_and_open_page
-    within ".navbar" do
+    within ".navbar_container" do
       expect(page).to have_link("Welcome page")
       expect(page).to have_link("Books")
     end
