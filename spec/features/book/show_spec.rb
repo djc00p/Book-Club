@@ -79,7 +79,29 @@ describe "on the book show page" do
 # User names should be unique within the system.
 # If user existed in the database, this review is associated
 # with that user.
+    it "should let a user create a new review" do
+      visit book_path(@book_1)
 
+      expect(page).to have_link("Add a new Review")
 
+      click_link "Add a new Review"
+
+      expect(current_path).to eq(new_book_review_path(@book_1.id))
+# save_and_open_page
+      fill_in "Title", with: "Great"
+      fill_in "Rating", with: 4
+      fill_in "User name", with: "three stooges"
+      fill_in "Review text", with: "This is a good book"
+      click_on "Create Review"
+
+      expect(current_path).to eq(book_path(@book_1))
+
+      within ".book_show_info" do
+        expect(page).to have_content("Review title: Great")
+        # expect(page).to have_content("Reviewer: Three Stooges")
+        expect(page).to have_content("Review rating: 4")
+        expect(page).to have_content("Review: This is a good book")
+      end
+    end
   end
 end
