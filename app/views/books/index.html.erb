@@ -23,8 +23,9 @@
 <section id="users_with_most_reviews">
   <h1>User With Most Reviews</h1>
   <ul>
-    <li><%= @most_ratings.keys[-1]%>, <%= @most_ratings.values[-1] %></li>
-    <li><%= @most_ratings.keys[-2]%>, <%= @most_ratings.values[-2] %></li><li><%= @most_ratings.keys[-3]%>, <%= @most_ratings.values[-3] %></li>
+    <li><%= link_to "#{@most_ratings.keys[-1]}", "/user/#{@most_ratings.keys[-1]}" %>, <%= @most_ratings.values[-1] %></li>
+    <li><%= link_to "#{@most_ratings.keys[-2]}", "/user/#{@most_ratings.keys[-2]}" %>, <%= @most_ratings.values[-2] %></li>
+    <li><%= link_to "#{@most_ratings.keys[-3]}", "/user/#{@most_ratings.keys[-3]}" %>, <%= @most_ratings.values[-3] %></li>
   </ul>
 </section>
   <% num = 1 %>
