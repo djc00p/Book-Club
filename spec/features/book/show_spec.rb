@@ -156,5 +156,47 @@ RSpec.describe "book show page" do
         end
       end
     end
+
+    # As a Visitor,
+# When I visit a book's show page
+# I see a link to add a new review for this book.
+# When I click on this link, I am taken to a new review path.
+# On this new page, I see a form where I can enter:
+# - a review title
+# - a username as a string
+# - a numeric rating that can only be a number from 1 to 5
+# - some text for the review itself
+# When the form is submitted, I should return to that book's
+# show page and I should see my review text.
+#
+# Users are created if they do not already exist.
+# User names should be converted to Title Case before saving.
+# User names should be unique within the system.
+# If user existed in the database, this review is associated
+# with that user.
+    it "should let a user create a new review" do
+      visit book_path(@book_1)
+
+      expect(page).to have_link("Add a new Review")
+
+      click_link "Add a new Review"
+
+      expect(current_path).to eq(new_book_review_path(@book_1.id))
+# save_and_open_page
+      fill_in "Title", with: "Great"
+      fill_in "Rating", with: 4
+      fill_in "User name", with: "three stooges"
+      fill_in "Review text", with: "This is a good book"
+      click_on "Create Review"
+
+      expect(current_path).to eq(book_path(@book_1))
+
+      within ".book_show_info" do
+        expect(page).to have_content("Review title: Great")
+        expect(page).to have_content("Reviewer: Three Stooges")
+        expect(page).to have_content("Review rating: 4")
+        expect(page).to have_content("Review: This is a good book")
+      end
+    end
   end
 end

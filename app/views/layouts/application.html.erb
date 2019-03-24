@@ -7,11 +7,12 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-  <nav class="navbar">
-    <%= link_to "Welcome page", root_path %>
-    <%= link_to "Books", books_path %>
+  <nav class="navbar_container">
+    <%= link_to "Welcome page", root_path, class: "welcome_link"%>
+    <%= link_to "Books", books_path, class: "books_link" %>
   </nav>
   <body>
+    <p class="flash"><%= flash.notice %></p>
     <%= yield %>
   </body>
 </html>

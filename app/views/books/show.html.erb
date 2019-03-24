@@ -46,3 +46,14 @@
 <section class="show_avg_rating">
   <h2>Average Rating: <%= @book.avg_rating(@book) %></h2>
 </section>
+
+<%= link_to "Add a new Review", new_book_review_path(@book) %>
+
+<section class="book_show_info">
+  <% @book.reviews.each do |review| %>
+    <p>Review title: <%= review.title %>
+    <p>Reviewer: <%= review.user_name %>
+    <p>Review rating: <%= review.rating %>
+    <p>Review: <%= review.review_text %>
+  <% end %>
+</section>

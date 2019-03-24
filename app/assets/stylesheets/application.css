@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+ .navbar_container {
+   display: flex;
+   flex-direction: row;
+   background-color: tan;
+   height: 30px;
+   justify-content: flex-end;
+ }
+ .welcome_link {
+   margin-right: 25px;
+   margin-top: 5px;
+ }
+ .books_link {
+   margin-top: 5px;
+   margin-left: 25px;
+   margin-right: 25px;
+ }
