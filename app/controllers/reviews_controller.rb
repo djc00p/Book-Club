@@ -7,11 +7,14 @@ class ReviewsController < ApplicationController
   def create
     edited_review_params = review_params
     edited_review_params[:user_name] = review_params[:user_name].titleize
-    @review = Review.new(edited_review_params)
-    @review.save
     @book = Book.find(params[:book_id])
-    @book.reviews << @review
-    redirect_to book_path(@book)
+    @review = @book.reviews.new(edited_review_params)
+    if @review.save
+      redirect_to book_path(@book)
+    else
+      flash.notice = "Incorrect data entered.  Please try again."
+      render :new
+    end
   end
 
   private
