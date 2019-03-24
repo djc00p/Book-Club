@@ -1,4 +1,27 @@
-<h1>Top Three Reviews</h1>
+<h1><%= @book.title %></h1>
+<section>
+  <section class="book_image">
+    <img src="<%= @book.image %>" alt="image">
+  </section>
+  <ul>
+    <li>Author(s): <%= @book.lists_authors(@book) %></li>
+    <li>Pages: <%= @book.pages %></li>
+    <li>Year Published: <%= @book.year_pub %></li>
+  </ul>
+</section>
+<section class="show_reviews">
+  <h2>Reviews</h2>
+  <% @book.reviews.each do |review| %>
+  <section id="review">
+    <h3><%= review.title %></h3>
+    <li><%= review.user_name %></li>
+    <li>Rating: <%= review.rating %></li>
+    <li>Comment: <%= review.review_text %></li>
+  </section>
+  <% end %>
+</section>
+
+<h2>Top Three Reviews</h2>
 <section  class="show_top_reviews">
   <% @book.reviews_by_rating(@book, :desc).each do |review| %>
     <ul>
@@ -9,7 +32,7 @@
   <% end %>
 </section>
 
-<h1>Bottom Three Reviews</h1>
+<h2>Bottom Three Reviews</h2>
 <section class="show_bottom_reviews">
   <% @book.reviews_by_rating(@book, :asc).each do |review| %>
     <ul>
@@ -21,7 +44,7 @@
 </section>
 
 <section class="show_avg_rating">
-  <h1>Average Rating: <%= @book.avg_rating(@book) %>
+  <h2>Average Rating: <%= @book.avg_rating(@book) %></h2>
 </section>
 
 <%= link_to "Add a new Review", new_book_review_path(@book) %>
