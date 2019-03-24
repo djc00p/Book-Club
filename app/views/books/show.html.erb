@@ -4,7 +4,7 @@
     <ul>
       <li><%= review.title %></li>
       <li>Rating: <%= review.rating %></li>
-      <li>Reviewer: <%= review.user_name %></li>
+      <li>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></li>
     </ul>
   <% end %>
 </section>
@@ -15,7 +15,7 @@
     <ul>
       <li><%= review.title %></li>
       <li>Rating: <%= review.rating %></li>
-      <li>Reviewer: <%= review.user_name %></li>
+      <li>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></li>
     </ul>
   <% end %>
 </section>
@@ -28,9 +28,11 @@
 
 <section class="book_show_info">
   <% @book.reviews.each do |review| %>
+  <section >
     <p>Review title: <%= review.title %>
     <p>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></p>
     <p>Review rating: <%= review.rating %>
     <p>Review: <%= review.review_text %>
+      </section>
   <% end %>
 </section>
