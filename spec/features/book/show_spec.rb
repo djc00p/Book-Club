@@ -98,7 +98,7 @@ describe "on the book show page" do
 
       within ".book_show_info" do
         expect(page).to have_content("Review title: Great")
-        # expect(page).to have_content("Reviewer: Three Stooges")
+        expect(page).to have_content("Reviewer: Three Stooges")
         expect(page).to have_content("Review rating: 4")
         expect(page).to have_content("Review: This is a good book")
       end
