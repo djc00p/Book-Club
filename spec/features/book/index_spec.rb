@@ -133,7 +133,43 @@ RSpec.describe "book index page", type: :feature do
       expect(page.all("ul")[2]).to have_content(@book_3.title)
       expect(page.all("ul")[3]).to have_content(@book_1.title)
     end
+#     As a visitor
+# With the exception of a book's show page,
+# Anywhere I see a book title on the site,
+# I can click on the book title to go to that book's show page.
+    it "has book titles as links to show page" do
+      visit books_path
+
+      within "#info-#{@book_1.id}" do
+        click_link "#{@book_1.title}"
+      end
+
+      expect(current_path).to eq(book_path(@book_1.id))
+
+      visit books_path
+
+      within "#highest_rated_books"do
+        click_link "#{@book_2.title}"
+      end
+
+      expect(current_path).to eq(book_path(@book_2.id))
+
+      visit books_path
+
+      within "#worst_rated_books" do
+        click_link "#{@book_3.title}"
+      end
+
+      expect(current_path).to eq(book_path(@book_3.id))
+
+      visit "/user/#{@review_6.user_name}"
+
+      within "#book_title_path#{@review_6.id}"do
+      save_and_open_page
+        click_link "#{@book_2.title}"
+      end
+
+      expect(current_path).to eq(book_path(@book_2.id))
+    end
   end
 end
-
-# save_and_open_page

@@ -1,5 +1,14 @@
 require 'rails_helper'
-#
+
+
+describe "on the book show page" do
+  context "shows book statistics" do
+    before :each do
+      @book_1 = create(:book)
+      @book_2 = create(:book)
+    end
+  end
+end
 # As a Visitor,
 # When I visit a book's show page,
 # I see the following book information:
@@ -16,6 +25,7 @@ RSpec.describe "book show page" do
       @book_1 = create(:book, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
       create(:author_book, author: @author_1, book: @book_1)
       @author_2.books << @book_1
+
       @review_1 = create(:review, book_id: @book_1.id)
       @review_2 = create(:review, rating: 4, user_name: "John", book_id: @book_1.id)
       @review_3 = create(:review, rating: 5, user_name: "Joe", book_id: @book_1.id)
@@ -157,23 +167,6 @@ RSpec.describe "book show page" do
       end
     end
 
-    # As a Visitor,
-# When I visit a book's show page
-# I see a link to add a new review for this book.
-# When I click on this link, I am taken to a new review path.
-# On this new page, I see a form where I can enter:
-# - a review title
-# - a username as a string
-# - a numeric rating that can only be a number from 1 to 5
-# - some text for the review itself
-# When the form is submitted, I should return to that book's
-# show page and I should see my review text.
-#
-# Users are created if they do not already exist.
-# User names should be converted to Title Case before saving.
-# User names should be unique within the system.
-# If user existed in the database, this review is associated
-# with that user.
     it "should let a user create a new review" do
       visit book_path(@book_1)
 

@@ -7,17 +7,17 @@
 <section id="highest_rated_books">
   <h1>Highest Rated Books</h1>
   <ol>
-    <li><%= @highest_rated_books.first.title %>, <%= @highest_rated_books.first.average_rating.round(1) %></li>
-    <li><%= @highest_rated_books.second.title %>, <%= @highest_rated_books.second.average_rating.round(1) %></li>
-    <li><%= @highest_rated_books.third.title %>, <%= @highest_rated_books.third.average_rating.round(1) %></li>
+    <li><%= link_to "#{@highest_rated_books.first.title}", book_path(@highest_rated_books.first.id) %>, <%= @highest_rated_books.first.average_rating.round(1) %></li>
+    <li><%= link_to "#{@highest_rated_books.second.title}", book_path(@highest_rated_books.second.id) %>, <%= @highest_rated_books.second.average_rating.round(1) %></li>
+    <li><%= link_to "#{@highest_rated_books.third.title}", book_path(@highest_rated_books.third.id) %>, <%= @highest_rated_books.third.average_rating.round(1) %></li>
   </ol>
 </section>
 <section id="worst_rated_books">
   <h1>Worst Rated Books</h1>
   <ol>
-    <li><%= @worst_rated_books.first.title %>, <%= @worst_rated_books.first.average_rating.round(1) %></li>
-    <li><%= @worst_rated_books.second.title %>, <%= @worst_rated_books.second.average_rating.round(1) %></li>
-    <li><%= @worst_rated_books.third.title %>, <%= @worst_rated_books.third.average_rating.round(1) %></li>
+    <li><%= link_to "#{@worst_rated_books.first.title}", book_path(@worst_rated_books.first.id) %>, <%= @worst_rated_books.first.average_rating.round(1) %></li>
+    <li><%= link_to "#{@worst_rated_books.second.title}", book_path(@worst_rated_books.second.id) %>, <%= @worst_rated_books.second.average_rating.round(1) %></li>
+    <li><%= link_to "#{@worst_rated_books.third.title}", book_path(@worst_rated_books.third.id) %>, <%= @worst_rated_books.third.average_rating.round(1) %></li>
   </ol>
 </section>
 <section id="users_with_most_reviews">
@@ -34,7 +34,7 @@
   <% %>
 
   <section class="book_display<% "#{num}"%>">
-  <li><%= book.title %></li>
+  <li><%= link_to "#{book.title}", book_path(book.id) %></li>
   <li>Average Book Rating: <%= book.avg_rating(book) %></li>
   <li>Total Reviews: <%= book.reviews.count %></li>
   <li>Pages: <%= book.pages %></li>

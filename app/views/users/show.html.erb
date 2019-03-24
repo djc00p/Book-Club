@@ -1,9 +1,9 @@
 <h1>Review(s) for <%= @user_name %></h1>
 <% @user_review.each do |review_info| %>
-  <p>Review Title: <%= review_info.title %></p>
-  <p>Review: <%= review_info.review_text %></p>
-  <p>Review Rating: <%= review_info.rating %></p>
-  <p>Book Title: <%= review_info.book.title %></p>
-  <img src="<%= review_info.book.image %>" alt="book image"/>
-  <p>Date of Review: <%= review_info.created_at %></p>
+    <p>Review Title: <%= review_info.title %></p>
+    <p>Review: <%= review_info.review_text %></p>
+    <p>Review Rating: <%= review_info.rating %></p>
+    <p id="book_title_path<%= review_info.id %>">Book Title: <%= link_to "#{review_info.book.title}", book_path(review_info.book.id) %></p>
+    <img src="<%= review_info.book.image %>" alt="book image"/>
+    <p>Date of Review: <%= review_info.created_at %></p>
 <% end %>
