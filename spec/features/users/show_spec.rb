@@ -1,17 +1,5 @@
 require 'rails_helper'
 
-# When I click on a user's name for any book review
-# I am taken to a show page for that user.
-# I should see all reviews that this
-# user has written.
-# Each review shows:
-# - the title of the review
-# - the description of the review
-# - the rating of the review
-# - the title of the book
-# - the thumbnail image for the book
-# - the date the review was written
-
 describe "on the user show page" do
   before :each do
     @book_1 = create(:book)
@@ -24,14 +12,10 @@ describe "on the user show page" do
   it "shows all reviews for that user" do
 
     visit book_path(@book_1)
-    # save_and_open_page
 
     within ".book_show_info" do
-      # binding.pry
       click_link "#{@review_1.user_name}"
     end
-      # save_and_open_page
-      # binding.pry
 
     expect(current_path).to eq("/user/#{@review_1.user_name}")
     expect(page).to have_content("Review Title: #{@review_1.title}")
@@ -47,4 +31,3 @@ describe "on the user show page" do
     expect(page).to_not have_content("Review Title: #{@review_3.title}")
   end
 end
-# end
