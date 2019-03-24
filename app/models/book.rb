@@ -16,6 +16,10 @@ class Book < ApplicationRecord
     book.reviews.order(rating: direction).limit(3)
   end
 
+  def lists_authors(book)
+    book.authors.pluck(:name).join(", ")
+  end
+
   def self.rated_books(updown)
     joins(:reviews)
     .select("Books.*, AVG(reviews.rating) as average_rating")
@@ -33,4 +37,5 @@ class Book < ApplicationRecord
   def self.amount_of_pages(updown)
     order("pages #{updown}")
   end
+
 end
