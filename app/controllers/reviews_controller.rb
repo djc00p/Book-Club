@@ -5,6 +5,8 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    edited_review_params = review_params
+    edited_review_params[:user_name] = review_params[:user_name].titleize
     @review = Review.new(review_params)
     @review.save
     @book = Book.find(params[:book_id])
