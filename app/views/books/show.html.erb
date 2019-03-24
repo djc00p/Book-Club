@@ -29,7 +29,7 @@
 <section class="book_show_info">
   <% @book.reviews.each do |review| %>
     <p>Review title: <%= review.title %>
-    <p>Reviewer: <%= review.user_name %>
+    <p>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></p>
     <p>Review rating: <%= review.rating %>
     <p>Review: <%= review.review_text %>
   <% end %>
