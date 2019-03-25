@@ -5,8 +5,8 @@ RSpec.describe "book index page", type: :feature do
     before :each do
       # @author_1 = Author.create(name: "Joe")
       @author_1 = create(:author)
-      @book_1 = @author_1.books.create(title: "In the wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
-      @book_2 = @author_1.books.create(title: "in flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
+      @book_1 = @author_1.books.create(title: "In The Wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
+      @book_2 = @author_1.books.create(title: "In Flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
       @book_3 = create(:book, created_at: 3.days.ago)
       # @author_1.books << @book_3
       create(:author_book, author: @author_1, book: @book_3)
@@ -28,7 +28,7 @@ RSpec.describe "book index page", type: :feature do
 
       within "#info-#{@book_1.id}" do
         expect(page).to have_content(@book_1.authors.pluck(:name).join(", "))
-        expect(page).to have_content(@book_1.title)
+        expect(page).to have_content("In The Wind")
         expect(page).to have_content("Pages: #{@book_1.pages}")
         expect(page).to have_content("Year Published: #{@book_1.year_pub}")
         expect(page).to have_css("img[src*='#{@book_1.image}']")
@@ -40,7 +40,7 @@ RSpec.describe "book index page", type: :feature do
         expect(page).to have_content("Pages: #{@book_2.pages}")
         expect(page).to have_content("Year Published: #{@book_2.year_pub}")
         expect(page).to have_css("img[src*='#{@book_2.image}']")
-        expect(page).to_not have_content(@book_1.title)
+        expect(page).to_not have_content("In The Wind")
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe "book index page", type: :feature do
       visit books_path
 
       within "#info-#{@book_1.id}" do
-        expect(page).to have_content(@book_1.title)
+        expect(page).to have_content("In The Wind")
         expect(page).to have_content("Average Book Rating: 3.5")
         expect(page).to have_content("Total Reviews: 4")
       end
@@ -59,15 +59,15 @@ RSpec.describe "book index page", type: :feature do
 
       within "#highest_rated_books" do
         expect(page).to have_content("Highest Rated Books")
-        expect(page).to have_content("in flames, 5.0")
-        expect(page).to have_content("In the wind, 3.5")
+        expect(page).to have_content("In Flames, 5.0")
+        expect(page).to have_content("In The Wind, 3.5")
         expect(page).to have_content("#{@book_3.title}, 2.7")
       end
       within "#worst_rated_books" do
         expect(page).to have_content("Worst Rated Books")
         expect(page).to have_content("#{@book_3.title}, 2.7")
-        expect(page).to have_content("In the wind, 3.5")
-        expect(page).to have_content("in flames, 5.0")
+        expect(page).to have_content("In The Wind, 3.5")
+        expect(page).to have_content("In Flames, 5.0")
       end
       within "#users_with_most_reviews" do
         # binding.pry
@@ -85,7 +85,7 @@ RSpec.describe "book index page", type: :feature do
       click_link "Sort by Highest Rated Book"
 
       expect(page.all("ul")[1]).to have_content(@book_2.title)
-      expect(page.all("ul")[2]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content("In The Wind")
       expect(page.all("ul")[3]).to have_content(@book_3.title)
 
       expect(page).to have_link("Sort by Lowest Rated Book")
@@ -94,7 +94,7 @@ RSpec.describe "book index page", type: :feature do
 
 
       expect(page.all("ul")[1]).to have_content(@book_3.title)
-      expect(page.all("ul")[2]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content("In The Wind")
       expect(page.all("ul")[3]).to have_content(@book_2.title)
 
       expect(page).to have_link("Sort by Most Amount of Pages")
@@ -103,7 +103,7 @@ RSpec.describe "book index page", type: :feature do
 
 
       expect(page.all("ul")[1]).to have_content(@book_2.title)
-      expect(page.all("ul")[2]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content("In The Wind")
       expect(page.all("ul")[3]).to have_content(@book_3.title)
 
       expect(page).to have_link("Sort by Least Amount of Pages")
@@ -112,7 +112,7 @@ RSpec.describe "book index page", type: :feature do
 
 
       expect(page.all("ul")[1]).to have_content(@book_3.title)
-      expect(page.all("ul")[2]).to have_content(@book_1.title)
+      expect(page.all("ul")[2]).to have_content("In The Wind")
       expect(page.all("ul")[3]).to have_content(@book_2.title)
 
       expect(page).to have_link("Sort by Most Amount of Reviews")
@@ -120,7 +120,7 @@ RSpec.describe "book index page", type: :feature do
       click_link "Sort by Most Amount of Reviews"
 
 
-      expect(page.all("ul")[1]).to have_content(@book_1.title)
+      expect(page.all("ul")[1]).to have_content("In The Wind")
       expect(page.all("ul")[2]).to have_content(@book_3.title)
       expect(page.all("ul")[3]).to have_content(@book_2.title)
 
@@ -131,7 +131,7 @@ RSpec.describe "book index page", type: :feature do
 
       expect(page.all("ul")[1]).to have_content(@book_2.title)
       expect(page.all("ul")[2]).to have_content(@book_3.title)
-      expect(page.all("ul")[3]).to have_content(@book_1.title)
+      expect(page.all("ul")[3]).to have_content("In The Wind")
     end
 #     As a visitor
 # With the exception of a book's show page,
@@ -141,7 +141,7 @@ RSpec.describe "book index page", type: :feature do
       visit books_path
 
       within "#info-#{@book_1.id}" do
-        click_link "#{@book_1.title}"
+        click_link "In The Wind"
       end
 
       expect(current_path).to eq(book_path(@book_1.id))
@@ -170,6 +170,14 @@ RSpec.describe "book index page", type: :feature do
       end
 
       expect(current_path).to eq(book_path(@book_2.id))
+    end
+
+    it "Add new book link" do
+      visit books_path
+
+      click_link "Add New Book"
+
+      expect(current_path).to eq(new_book_path)
     end
   end
 end
