@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  validates_presence_of :title
+  validates_uniqueness_of :title
   validates_presence_of :pages
   validates_presence_of :year_pub
   validates_numericality_of :year_pub, only_integer: true
