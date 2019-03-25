@@ -12,7 +12,9 @@
     <%= link_to "Books", books_path, class: "books_link" %>
   </nav>
   <body>
+    <section id="body_of_doc"
     <p class="flash"><%= flash.notice %></p>
     <%= yield %>
+    </section>
   </body>
 </html>
