@@ -9,11 +9,13 @@ RSpec.describe Book, type: :model do
     it { should validate_numericality_of(:year_pub).only_integer}
     it { should validate_numericality_of(:pages).only_integer}
   end
+
   describe "Relationships" do
     it {should have_many :author_books}
     it {should have_many(:authors).through :author_books}
     it {should have_many :reviews}
   end
+
   describe "Instance Methods" do
     before :each do
       # @author_1 = Author.create(name: "Joe")
@@ -30,6 +32,7 @@ RSpec.describe Book, type: :model do
       @review_3 = create(:review, rating: 4, book_id: @book_1.id)
       @review_4 = create(:review, rating: 2, book_id: @book_1.id)
     end
+
     it "should calculate average rating" do
       expect(@book_1.avg_rating(@book_1)).to eq(3.5)
     end
@@ -43,6 +46,7 @@ RSpec.describe Book, type: :model do
       direction = :asc
       expect(@book_1.reviews_by_rating(@book_1, "#{direction}")).to eq([@review_4, @review_1, @review_3])
     end
+
     it "should list all authors" do
       expect(@book_1.lists_authors(@book_1)).to eq("#{@author_1.name}, Mary")
     end
@@ -57,9 +61,7 @@ RSpec.describe Book, type: :model do
       @author_2.books << @book_1
       @book_2 = @author_1.books.create(title: "in flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
       @book_3 = create(:book, created_at: 3.days.ago)
-      # @author_1.books << @book_3
       create(:author_book, author: @author_1, book: @book_3)
-      # binding.pry
       @review_1 = create(:review, book_id: @book_1.id)
       @review_2 = create(:review, rating: 5, book_id: @book_1.id, user_name: "Jenna")
       @review_3 = create(:review, rating: 4, book_id: @book_1.id)
@@ -69,9 +71,8 @@ RSpec.describe Book, type: :model do
       @review_7 = create(:review, rating: 1, book_id: @book_3.id)
       @review_8 = create(:review, rating: 3, book_id: @book_3.id, user_name: "Bob")
       @review_9 = create(:review, rating: 4, book_id: @book_3.id, user_name: "Bob")
-      # @review_10 = create(:review, rating: 4, book_id: @book_3.id, user_name: "Ace")
-
     end
+
     it ".rated_books" do
       asc ="asc"
       desc ="desc"
@@ -97,6 +98,5 @@ RSpec.describe Book, type: :model do
       expect(Book.amount_of_pages(desc)).to eq([@book_2,@book_1,@book_3])
       expect(Book.amount_of_pages(asc)).to eq([@book_3,@book_1,@book_2])
     end
-
   end
 end

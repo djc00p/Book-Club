@@ -3,14 +3,11 @@ require 'rails_helper'
 RSpec.describe "book index page", type: :feature do
   describe "As a Visitor" do
     before :each do
-      # @author_1 = Author.create(name: "Joe")
       @author_1 = create(:author)
       @book_1 = @author_1.books.create(title: "In The Wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
       @book_2 = @author_1.books.create(title: "In Flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
       @book_3 = create(:book, created_at: 3.days.ago)
-      # @author_1.books << @book_3
       create(:author_book, author: @author_1, book: @book_3)
-      # binding.pry
       @review_1 = create(:review, book_id: @book_1.id)
       @review_2 = create(:review, rating: 5, book_id: @book_1.id, user_name: "Jenna")
       @review_3 = create(:review, rating: 4, book_id: @book_1.id)
@@ -22,7 +19,6 @@ RSpec.describe "book index page", type: :feature do
       @review_9 = create(:review, rating: 4, book_id: @book_3.id, user_name: "Bob")
     end
     it "shows all book titles" do
-      # binding.pry
 
       visit books_path
 
@@ -34,6 +30,7 @@ RSpec.describe "book index page", type: :feature do
         expect(page).to have_css("img[src*='#{@book_1.image}']")
         expect(page).to_not have_content(@book_2.title)
       end
+
       within "#info-#{@book_2.id}" do
         expect(page).to have_content(@book_2.authors.pluck(:name).join(", "))
         expect(page).to have_content(@book_2.title)
@@ -63,12 +60,14 @@ RSpec.describe "book index page", type: :feature do
         expect(page).to have_content("In The Wind, 3.5")
         expect(page).to have_content("#{@book_3.title}, 2.7")
       end
+
       within "#worst_rated_books" do
         expect(page).to have_content("Worst Rated Books")
         expect(page).to have_content("#{@book_3.title}, 2.7")
         expect(page).to have_content("In The Wind, 3.5")
         expect(page).to have_content("In Flames, 5.0")
       end
+
       within "#users_with_most_reviews" do
         # binding.pry
         expect(page).to have_content("User With Most Reviews")
@@ -92,7 +91,6 @@ RSpec.describe "book index page", type: :feature do
 
       click_link "Sort by Lowest Rated Book"
 
-
       expect(page.all("ul")[1]).to have_content(@book_3.title)
       expect(page.all("ul")[2]).to have_content("In The Wind")
       expect(page.all("ul")[3]).to have_content(@book_2.title)
@@ -100,7 +98,6 @@ RSpec.describe "book index page", type: :feature do
       expect(page).to have_link("Sort by Most Amount of Pages")
 
       click_link "Sort by Most Amount of Pages"
-
 
       expect(page.all("ul")[1]).to have_content(@book_2.title)
       expect(page.all("ul")[2]).to have_content("In The Wind")
@@ -110,7 +107,6 @@ RSpec.describe "book index page", type: :feature do
 
       click_link "Sort by Least Amount of Pages"
 
-
       expect(page.all("ul")[1]).to have_content(@book_3.title)
       expect(page.all("ul")[2]).to have_content("In The Wind")
       expect(page.all("ul")[3]).to have_content(@book_2.title)
@@ -119,7 +115,6 @@ RSpec.describe "book index page", type: :feature do
 
       click_link "Sort by Most Amount of Reviews"
 
-
       expect(page.all("ul")[1]).to have_content("In The Wind")
       expect(page.all("ul")[2]).to have_content(@book_3.title)
       expect(page.all("ul")[3]).to have_content(@book_2.title)
@@ -127,7 +122,6 @@ RSpec.describe "book index page", type: :feature do
       expect(page).to have_link("Sort by Least Amount of Reviews")
 
       click_link "Sort by Least Amount of Reviews"
-
 
       expect(page.all("ul")[1]).to have_content(@book_2.title)
       expect(page.all("ul")[2]).to have_content(@book_3.title)
@@ -165,7 +159,6 @@ RSpec.describe "book index page", type: :feature do
       visit "/user/#{@review_6.user_name}"
 
       within "#book_title_path#{@review_6.id}"do
-      # save_and_open_page
         click_link "#{@book_2.title}"
       end
 
