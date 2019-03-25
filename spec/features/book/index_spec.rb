@@ -165,7 +165,7 @@ RSpec.describe "book index page", type: :feature do
       visit "/user/#{@review_6.user_name}"
 
       within "#book_title_path#{@review_6.id}"do
-      save_and_open_page
+      # save_and_open_page
         click_link "#{@book_2.title}"
       end
 
