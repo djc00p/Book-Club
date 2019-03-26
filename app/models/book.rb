@@ -20,6 +20,11 @@ class Book < ApplicationRecord
     book.authors.pluck(:name).join(", ")
   end
 
+  def high_rating(book)
+    # binding.pry
+    book.reviews.order(rating: :desc).first
+  end
+
   def self.rated_books(updown)
     joins(:reviews)
     .select("Books.*, AVG(reviews.rating) as average_rating")

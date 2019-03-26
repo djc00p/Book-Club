@@ -98,5 +98,25 @@ RSpec.describe Book, type: :model do
       expect(Book.amount_of_pages(desc)).to eq([@book_2,@book_1,@book_3])
       expect(Book.amount_of_pages(asc)).to eq([@book_3,@book_1,@book_2])
     end
+
+    describe 'instance methods' do
+      it ".high_rating" do
+        author = Author.create(name: "Joseph")
+        book_1 = author.books.create!(title: "not a book", pages: 5, year_pub: 1980)
+        book_2 = author.books.create(title: "also not a book", pages: 6, year_pub: 1990)
+        review_1 = book_1.reviews.create(title: "It's ok", rating: 3, review_text: "not bad", user_name: "Joel")
+        review_2 = book_1.reviews.create(title: "It's bad", rating: 1, review_text: "really bad", user_name: "Jimmy")
+        review_3 = book_2.reviews.create(title: "It's great", rating: 5, review_text: "really great", user_name: "Josh")
+        review_4 = book_2.reviews.create(title: "It's decent", rating: 4, review_text: "liked it", user_name: "Jesse")
+
+        within "#author_show_book#{book_1.id}" do
+          expect(book_1.high_rating(book_1)).to eq(review_1)
+        end
+
+        within "#author_show_book#{book_2.id}" do
+          expect(book_2.high_rating(book_2)).to eq(review_3)
+        end
+      end
+    end
   end
 end

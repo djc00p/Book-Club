@@ -10,4 +10,5 @@ class Review < ApplicationRecord
   def self.total_count
     Review.group(:user_name).count(:review_text)
   end
+
 end
