@@ -29,6 +29,7 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
+    # binding.pry
   end
 
   def show
