@@ -34,4 +34,34 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
   end
+
+  def new
+    @book = Book.new
+  end
+
+  def create
+    book_params[:title] = book_params[:title].titleize
+    book = Book.new(book_params)
+    if book.save
+      authors = author_params[:author].titleize.split(", ")
+      authors.each do |author|
+        new_author = Author.find_or_create_by(name: author)
+        new_author.books << book
+      end
+      redirect_to book_path(book)
+    else
+      @book = Book.new
+      render :new
+    end
+  end
+
+  private
+
+  def book_params
+    params.require(:book).permit(:title, :pages, :year_pub, :image)
+  end
+
+  def author_params
+    params.require(:book).permit(:author)
+  end
 end

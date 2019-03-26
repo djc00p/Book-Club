@@ -17,13 +17,27 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    username = Review.find(params[:id]).user_name
+    review = Review.find(params[:id])
+    review.destroy
+    flash.notice = "Review has been deleted."
+    # binding. pry
+    if Review.where(user_name: username) == []
+      redirect_to books_path
+    else
+      redirect_to "/user/#{username}"
+    end
+    # redirect_to
+  end
+
   private
 
   def review_params
     params.require(:review).permit(:title, :rating, :user_name, :review_text)
   end
 
-  def book_params
-    params.require(:book_id)
-  end
+  # def book_params
+  #   params.require(:book_id)
+  # end
 end

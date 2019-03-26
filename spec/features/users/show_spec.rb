@@ -1,17 +1,5 @@
 require 'rails_helper'
 
-# When I click on a user's name for any book review
-# I am taken to a show page for that user.
-# I should see all reviews that this
-# user has written.
-# Each review shows:
-# - the title of the review
-# - the description of the review
-# - the rating of the review
-# - the title of the book
-# - the thumbnail image for the book
-# - the date the review was written
-
 describe "on the user show page" do
   before :each do
     @book_1 = create(:book)
@@ -21,6 +9,7 @@ describe "on the user show page" do
     @review_2 = create(:review, rating: 4, book_id: @book_2.id, created_at: 4.days.ago)
     @review_3 = create(:review, rating: 5, user_name: "Joe", book_id: @book_1.id, created_at: 1.day.ago)
     @review_4 = create(:review, book_id: @book_3.id, created_at: 2.days.ago)
+
   end
 
   it "shows all reviews for that user" do
@@ -43,6 +32,23 @@ describe "on the user show page" do
     expect(page).to have_content("Review Rating: #{@review_2.rating}")
     expect(page).to have_content("Date of Review: #{@review_2.created_at}")
     expect(page).to_not have_content("Review Title: #{@review_3.title}")
+  end
+
+  it "delete a review from a user with multiple reviews" do
+    visit "/user/#{@review_3.user_name}"
+
+    click_link "Delete Review: #{@review_3.title}"
+
+    expect(page).to_not have_content("Review Title: #{@review_3.title}")
+    expect(page).to have_content("Review Title: #{@review_4.title}")
+  end
+
+  it "delete a review from a user with a single review" do
+    visit "/user/#{@review_5.user_name}"
+
+    click_link "Delete Review: #{@review_5.title}"
+
+    expect(current_path).to eq(books_path)
   end
 end
 
@@ -83,3 +89,4 @@ describe "on the user show page" do
   end
 
 end
+

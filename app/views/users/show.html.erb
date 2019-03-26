@@ -8,6 +8,8 @@
     <li>Review Rating: <%= review_info.rating %></li>
     <li id="book_title_path<%= review_info.id %>">Book Title: <%= link_to "#{review_info.book.title}", book_path(review_info.book.id) %></li>
     <img src="<%= review_info.book.image %>" alt="book image"/>
+
     <li>Date of Review: <%= review_info.created_at %></li>
   </ul>
+    <%= link_to "Delete Review: #{review_info.title}", review_path(review_info.id), method: :delete, data: { confirm: "Are you sure?"} %>
 <% end %>

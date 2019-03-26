@@ -4,6 +4,8 @@
 <%= link_to "Sort by Least Amount of Pages", books_path(sort: "least_pages") %>
 <%= link_to "Sort by Most Amount of Reviews", books_path(sort: "most_reviews") %>
 <%= link_to "Sort by Least Amount of Reviews", books_path(sort: "least_reviews") %>
+<%= link_to "Add New Book", new_book_path %>
+
 <section id="highest_rated_books">
   <h1>Highest Rated Books</h1>
   <ol>
@@ -34,13 +36,13 @@
   <% %>
 
   <section class="book_display<% "#{num}"%>">
-  <li><%= link_to "#{book.title}", book_path(book.id) %></li>
-  <li>Average Book Rating: <%= book.avg_rating(book) %></li>
-  <li>Total Reviews: <%= book.reviews.count %></li>
+  <li><%= link_to "#{book.title.titlecase}", book_path(book.id) %></li>
+  <li>Author(s): <%= book.authors.pluck(:name).join(", ") %></li>
   <li>Pages: <%= book.pages %></li>
   <li>Year Published: <%= book.year_pub %></li>
+  <li>Average Book Rating: <%= book.avg_rating(book) %></li>
+  <li>Total Reviews: <%= book.reviews.count %></li>
   <li> <img src= "<%= book.image %>"</li>
-  <li><%= book.authors.pluck(:name).join(", ") %></li>
 </ul>
 <% num += 1 %>
 </section>
