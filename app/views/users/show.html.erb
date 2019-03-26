@@ -1,10 +1,15 @@
 <h1>Review(s) for <%= @user_name %></h1>
+<%= link_to "Sort Reviews in Ascending Order", user_path("#{@user_name}", sort: 'ascend') %>
+<%= link_to "Sort Reviews in Descending Order", user_path("#{@user_name}", sort: 'descend') %>
 <% @user_review.each do |review_info| %>
-    <p>Review Title: <%= review_info.title %></p>
-    <p>Review: <%= review_info.review_text %></p>
-    <p>Review Rating: <%= review_info.rating %></p>
-    <p id="book_title_path<%= review_info.id %>">Book Title: <%= link_to "#{review_info.book.title}", book_path(review_info.book.id) %></p>
+  <ul>
+    <li>Review Title: <%= review_info.title %></li>
+    <li>Review: <%= review_info.review_text %></li>
+    <li>Review Rating: <%= review_info.rating %></li>
+    <li id="book_title_path<%= review_info.id %>">Book Title: <%= link_to "#{review_info.book.title}", book_path(review_info.book.id) %></li>
     <img src="<%= review_info.book.image %>" alt="book image"/>
-    <p>Date of Review: <%= review_info.created_at %></p>
+
+    <li>Date of Review: <%= review_info.created_at %></li>
+  </ul>
     <%= link_to "Delete Review: #{review_info.title}", review_path(review_info.id), method: :delete, data: { confirm: "Are you sure?"} %>
 <% end %>
