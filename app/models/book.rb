@@ -21,7 +21,6 @@ class Book < ApplicationRecord
   end
 
   def high_rating(book)
-    # binding.pry
     book.reviews.order(rating: :desc).first
   end
 
