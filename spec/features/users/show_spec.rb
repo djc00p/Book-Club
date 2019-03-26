@@ -89,4 +89,3 @@ describe "on the user show page" do
   end
 
 end
-
