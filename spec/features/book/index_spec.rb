@@ -92,7 +92,6 @@ RSpec.describe "book index page", type: :feature do
 
       click_link "Sort by Lowest Rated Book"
 
-
       expect(page.all("ul")[1]).to have_content(@book_3.title)
       expect(page.all("ul")[2]).to have_content(@book_1.title)
       expect(page.all("ul")[3]).to have_content(@book_2.title)
@@ -100,7 +99,6 @@ RSpec.describe "book index page", type: :feature do
       expect(page).to have_link("Sort by Most Amount of Pages")
 
       click_link "Sort by Most Amount of Pages"
-
 
       expect(page.all("ul")[1]).to have_content(@book_2.title)
       expect(page.all("ul")[2]).to have_content(@book_1.title)
@@ -110,7 +108,6 @@ RSpec.describe "book index page", type: :feature do
 
       click_link "Sort by Least Amount of Pages"
 
-
       expect(page.all("ul")[1]).to have_content(@book_3.title)
       expect(page.all("ul")[2]).to have_content(@book_1.title)
       expect(page.all("ul")[3]).to have_content(@book_2.title)
@@ -119,7 +116,6 @@ RSpec.describe "book index page", type: :feature do
 
       click_link "Sort by Most Amount of Reviews"
 
-
       expect(page.all("ul")[1]).to have_content(@book_1.title)
       expect(page.all("ul")[2]).to have_content(@book_3.title)
       expect(page.all("ul")[3]).to have_content(@book_2.title)
@@ -127,7 +123,6 @@ RSpec.describe "book index page", type: :feature do
       expect(page).to have_link("Sort by Least Amount of Reviews")
 
       click_link "Sort by Least Amount of Reviews"
-
 
       expect(page.all("ul")[1]).to have_content(@book_2.title)
       expect(page.all("ul")[2]).to have_content(@book_3.title)
@@ -165,7 +160,7 @@ RSpec.describe "book index page", type: :feature do
       visit "/user/#{@review_6.user_name}"
 
       within "#book_title_path#{@review_6.id}"do
-      save_and_open_page
+      # save_and_open_page
         click_link "#{@book_2.title}"
       end
 

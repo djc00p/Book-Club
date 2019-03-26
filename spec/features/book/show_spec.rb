@@ -94,7 +94,7 @@ RSpec.describe "book show page" do
       expect(page.all("#review")[4]).to have_content(@review_5.rating)
       expect(page.all("#review")[5]).to have_content(@review_6.rating)
       expect(page.all("#review")[6]).to have_content(@review_7.rating)
-    
+
       expect(page.all("#review")[0]).to have_content(@review_1.review_text)
       expect(page.all("#review")[1]).to have_content(@review_2.review_text)
       expect(page.all("#review")[2]).to have_content(@review_3.review_text)
@@ -168,6 +168,7 @@ RSpec.describe "book show page" do
     end
 
     it "should let a user create a new review" do
+      @book_1 = create(:book)
       visit book_path(@book_1)
 
       expect(page).to have_link("Add a new Review")
