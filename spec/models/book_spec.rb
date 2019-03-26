@@ -48,7 +48,7 @@ RSpec.describe Book, type: :model do
     end
 
     it "should list all authors" do
-      expect(@book_1.lists_authors(@book_1)).to eq("#{@author_1.name}, Mary")
+      expect(@book_1.lists_authors(@book_1).join(" ")).to eq("#{@author_1.name} Mary")
     end
   end
 

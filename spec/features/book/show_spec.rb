@@ -26,7 +26,7 @@ RSpec.describe "book show page" do
     it "shows author(s)" do
       visit book_path(@book_1)
 
-      expect(page).to have_content("Author(s): #{@book_1.authors.pluck(:name).join(", ")}")
+      expect(page).to have_content("Author(s): #{@book_1.authors.pluck(:name).join(" ")}")
     end
 
     it "shows number of pages" do
@@ -231,6 +231,41 @@ RSpec.describe "book show page" do
 
         expect(current_path).to eq(books_path)
         expect(page).to_not have_content(@book_5.title)
+      end
+    end
+  end
+
+  describe "on the book show page" do
+    context "author names link to show page" do
+      before :each do
+        @author_1 = create(:author)
+        @author_2 = create(:author, name: "Jake")
+        @book_1 = @author_1.books.create(title: "In The Wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
+        @author_2.books << @book_1
+        @book_2 = @author_1.books.create(title: "In Flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
+        @book_3 = create(:book, created_at: 3.days.ago)
+        @book_5 = create(:book, title: "Yolo", created_at: 3.days.ago)
+        @book_4 = create(:book, title: "Boom Baby", created_at: 3.days.ago)
+        create(:author_book, author: @author_1, book: @book_3)
+        @review_1 = create(:review, book_id: @book_1.id)
+        @review_2 = create(:review, rating: 5, book_id: @book_1.id, user_name: "Jenna")
+        @review_3 = create(:review, rating: 4, book_id: @book_1.id)
+        @review_4 = create(:review, rating: 2, book_id: @book_1.id, user_name: "Jenna")
+        @review_5 = create(:review, rating: 5, book_id: @book_2.id)
+      end
+
+      it "should link each author to their show page" do
+        visit book_path(@book_1)
+        # save_and_open_page
+        click_link "Jake"
+
+        expect(current_path).to eq(author_path(@author_2.name))
+
+        visit book_path(@book_1)
+
+        click_link "#{@author_1.name}"
+
+        expect(current_path).to eq(author_path(@author_1.name))
       end
     end
   end

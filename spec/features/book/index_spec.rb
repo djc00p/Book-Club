@@ -4,8 +4,10 @@ RSpec.describe "book index page", type: :feature do
   describe "As a Visitor" do
     before :each do
       @author_1 = create(:author)
+      @author_2 = Author.create(name: "Mary")
       @book_1 = @author_1.books.create(title: "In The Wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
       @book_2 = @author_1.books.create(title: "In Flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
+      @author_2.books << @book_1
       @book_3 = create(:book, created_at: 3.days.ago)
       create(:author_book, author: @author_1, book: @book_3)
       @review_1 = create(:review, book_id: @book_1.id)
@@ -23,7 +25,7 @@ RSpec.describe "book index page", type: :feature do
       visit books_path
 
       within "#info-#{@book_1.id}" do
-        expect(page).to have_content(@book_1.authors.pluck(:name).join(", "))
+        expect(page).to have_content(@book_1.authors.pluck(:name).join(" "))
         expect(page).to have_content("In The Wind")
         expect(page).to have_content("Pages: #{@book_1.pages}")
         expect(page).to have_content("Year Published: #{@book_1.year_pub}")
@@ -174,6 +176,14 @@ RSpec.describe "book index page", type: :feature do
       click_link "Add New Book"
 
       expect(current_path).to eq(new_book_path)
+    end
+
+    it "should link each author to their show page" do
+      visit books_path
+      save_and_open_page
+      click_link "Mary"
+
+      expect(current_path).to eq(author_path(@author_2.name))
     end
   end
 end
