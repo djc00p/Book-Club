@@ -9,6 +9,7 @@ describe "on the user show page" do
     @review_2 = create(:review, rating: 4, book_id: @book_2.id, created_at: 4.days.ago)
     @review_3 = create(:review, rating: 5, user_name: "Joe", book_id: @book_1.id, created_at: 1.day.ago)
     @review_4 = create(:review, book_id: @book_3.id, created_at: 2.days.ago)
+    @review_5 = create(:review, book_id: @book_3.id, user_name: "Jackie", created_at: 2.days.ago)
 
   end
 
@@ -35,11 +36,11 @@ describe "on the user show page" do
   end
 
   it "delete a review from a user with multiple reviews" do
-    visit "/user/#{@review_3.user_name}"
+    visit user_path("#{@review_2.user_name}")
 
-    click_link "Delete Review: #{@review_3.title}"
+    click_link "Delete Review: #{@review_2.title}"
 
-    expect(page).to_not have_content("Review Title: #{@review_3.title}")
+    expect(page).to_not have_content("Review Title: #{@review_2.title}")
     expect(page).to have_content("Review Title: #{@review_4.title}")
   end
 
@@ -89,4 +90,3 @@ describe "on the user show page" do
   end
 
 end
-
