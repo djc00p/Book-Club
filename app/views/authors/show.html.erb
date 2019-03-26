@@ -8,6 +8,13 @@
     <%  end %>
     <%= book.pages %><br/>
     <%= book.year_pub %><br/>
-    <img src="<%= book.image %>">
+    <img src="<%= book.image %>"><br/>
+    <% if book.high_rating(book) %>
+      <%= book.high_rating(book).title %><br/>
+      <%= book.high_rating(book).rating %><br/>
+      <%= book.high_rating(book).user_name %><br/>
+    <% else %>
+      <p>Book has no ratings</p><br/>
+    <% end %>
   </section>
 <% end %>

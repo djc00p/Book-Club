@@ -41,4 +41,37 @@ describe "on the author's show page" do
       end
     end
   end
+
+#   As a Visitor,
+# When I visit an author's show page,
+# For each book written by that author
+# I should see one of the highest rated reviews
+# (review should contain the title, score, and user name)
+  describe "for each book" do
+    it "shows one of the highest reviews" do
+      author = Author.create(name: "Joseph")
+      book_1 = author.books.create(title: "book1", pages: 5, year_pub: 1980)
+      book_2 = author.books.create(title: "book2", pages: 6, year_pub: 1990)
+      review_1 = book_1.reviews.create(title: "It's ok", rating: 3, review_text: "not bad", user_name: "Joel")
+      review_2 = book_1.reviews.create(title: "It's bad", rating: 1, review_text: "really bad", user_name: "Jimmy")
+      review_3 = book_2.reviews.create(title: "It's great", rating: 5, review_text: "really great", user_name: "Josh")
+      review_4 = book_2.reviews.create(title: "It's decent", rating: 4, review_text: "liked it", user_name: "Jesse")
+
+      visit author_path(author)
+
+      within "#author_show_book#{book_1.id}" do
+        expect(page).to have_content(review_1.title)
+        expect(page).to have_content(review_1.rating)
+        expect(page).to have_content(review_1.user_name)
+        expect(page).to_not have_content(review_3.title)
+      end
+      within "#author_show_book#{book_2.id}" do
+        expect(page).to have_content(review_3.title)
+        expect(page).to have_content(review_3.rating)
+        expect(page).to have_content(review_3.user_name)
+        expect(page).to_not have_content(review_1.title)
+      end
+
+    end
+  end
 end
