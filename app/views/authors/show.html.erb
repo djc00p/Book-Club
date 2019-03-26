@@ -12,7 +12,7 @@
     <% if book.high_rating(book) %>
       <%= book.high_rating(book).title %><br/>
       <%= book.high_rating(book).rating %><br/>
-      <%= book.high_rating(book).user_name %><br/>
+      <%= link_to "#{book.high_rating(book).user_name}", "/user/#{book.high_rating(book).user_name}" %><br/>
     <% else %>
       <p>Book has no ratings</p><br/>
     <% end %>
