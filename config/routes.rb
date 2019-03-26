@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  get '/user/:id', to: "users#show"
+  get '/user/:id', to: "users#show", as: 'user'
+
 end
