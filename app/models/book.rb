@@ -17,7 +17,7 @@ class Book < ApplicationRecord
   end
 
   def lists_authors(book)
-    book.authors.pluck(:name).join(", ")
+    book.authors.pluck(:name)
   end
 
   def high_rating(book)

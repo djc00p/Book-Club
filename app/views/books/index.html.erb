@@ -37,7 +37,11 @@
 
   <section class="book_display<% "#{num}"%>">
   <li><%= link_to "#{book.title.titlecase}", book_path(book.id) %></li>
-  <li>Author(s): <%= book.authors.pluck(:name).join(", ") %></li>
+  <li>Author(s): <% list = book.authors.pluck(:name) %>
+    <% list.each do |author| %>
+    <%= link_to "#{author}", author_path(author) %>
+    <% end.join(", ").html_safe %>
+  </li>
   <li>Pages: <%= book.pages %></li>
   <li>Year Published: <%= book.year_pub %></li>
   <li>Average Book Rating: <%= book.avg_rating(book) %></li>

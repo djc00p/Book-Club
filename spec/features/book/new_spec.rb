@@ -37,7 +37,7 @@ RSpec.describe "New book page" do
       image = "https://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png"
 
       expect(page).to have_content('Must Be Nice')
-      expect(page).to have_content('James, Jack')
+      expect(page).to have_content('James Jack')
       expect(page).to have_content('345')
       expect(page).to have_content('2009')
       expect(page).to have_css("img[contains(src,'https://smartmobilestudio.com/wp-content/uploads/2012/06/leather-book-preview.png')]")
