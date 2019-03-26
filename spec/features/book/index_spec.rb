@@ -180,10 +180,10 @@ RSpec.describe "book index page", type: :feature do
 
     it "should link each author to their show page" do
       visit books_path
-      save_and_open_page
-      click_link "Mary"
+      
+      click_link "#{@author_2.name}"
 
-      expect(current_path).to eq(author_path(@author_2.name))
+      expect(current_path).to eq(author_path(@author_2.id))
     end
   end
 end

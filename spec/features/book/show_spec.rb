@@ -259,13 +259,13 @@ RSpec.describe "book show page" do
         # save_and_open_page
         click_link "Jake"
 
-        expect(current_path).to eq(author_path(@author_2.name))
+        expect(current_path).to eq(author_path(@author_2))
 
         visit book_path(@book_1)
 
         click_link "#{@author_1.name}"
 
-        expect(current_path).to eq(author_path(@author_1.name))
+        expect(current_path).to eq(author_path(@author_1))
       end
     end
   end

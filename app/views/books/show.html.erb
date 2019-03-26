@@ -4,8 +4,8 @@
     <img src="<%= @book.image %>" alt="image">
   </section>
   <ul>
-    <li>Author(s): <% @book.lists_authors(@book).each do |author| %>
-      <%= link_to "#{author}", author_path(author) %>
+    <li>Author(s): <% @book.authors.each do |author| %>
+      <%= link_to "#{author.name}", author_path(author) %>
       <% end.join(", ").html_safe %>
     </li>
     <li>Pages: <%= @book.pages %></li>
