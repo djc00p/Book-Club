@@ -4,7 +4,6 @@
   <section class="book_image">
     <img src="<%= @book.image %>" alt="image">
   </section>
-
     Author(s): <% @book.authors.each do |author| %>
 
       <%= link_to "#{author.name}", author_path(author) %><br/>
@@ -12,7 +11,7 @@
 
     Pages: <%= @book.pages %><br/>
     Year Published: <%= @book.year_pub %>
-
+  
 </section>
 </div>
 <section class="show_reviews">

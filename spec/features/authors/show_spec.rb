@@ -71,7 +71,39 @@ describe "on the author's show page" do
         expect(page).to have_content(review_3.user_name)
         expect(page).to_not have_content(review_1.title)
       end
+    end
+  end
 
+  describe "On author show page" do
+    before :each do
+      @author_1 = create(:author)
+      @author_2 = create(:author, name: "Jon")
+      @author_3 = create(:author, name: "Mary")
+      @book_1 = @author_1.books.create(title: "In The Wind", pages: 329, year_pub: 1995, image: "https://upload.wikimedia.org/wikipedia/en/f/f0/Harry_Potter_and_the_Half-Blood_Prince.jpg")
+      @book_2 = @author_1.books.create(title: "In Flames", pages: 567, year_pub: 2015, image: "hfjqlsfhipueqhnf")
+      @book_3 = create(:book, created_at: 3.days.ago)
+      create(:author_book, author: @author_3, book: @book_3)
+      @review_1 = create(:review, book_id: @book_1.id)
+      @review_2 = create(:review, rating: 5, book_id: @book_1.id, user_name: "Jenna")
+      @review_3 = create(:review, rating: 4, book_id: @book_1.id)
+      @review_4 = create(:review, rating: 2, book_id: @book_1.id, user_name: "Jenna")
+      @review_5 = create(:review, rating: 5, book_id: @book_2.id)
+      @review_6 = create(:review, rating: 5, book_id: @book_2.id, user_name: "Jenna")
+      @review_7 = create(:review, rating: 1, book_id: @book_3.id)
+      @review_8 = create(:review, rating: 3, book_id: @book_3.id, user_name: "Bob")
+      @review_9 = create(:review, rating: 4, book_id: @book_3.id, user_name: "Bob")
+    end
+
+    it "should have a link to delete author" do
+
+      visit author_path(@author_1)
+      click_link "Delete Author"
+
+      expect(current_path).to eq(books_path)
+      expect(page).to_not have_content(@author_1.name)
+      expect(page).to_not have_content(@book_1.title)
+      expect(page).to_not have_content(@book_2.title)
+      # save_and_open_page
     end
   end
 end

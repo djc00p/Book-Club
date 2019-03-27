@@ -19,16 +19,32 @@
   <h1>Highest Rated Books</h1>
   <ol>
     <li><%= link_to "#{@highest_rated_books.first.title}", book_path(@highest_rated_books.first.id) %>, <%= @highest_rated_books.first.average_rating.round(1) %></li>
-    <li><%= link_to "#{@highest_rated_books.second.title}", book_path(@highest_rated_books.second.id) %>, <%= @highest_rated_books.second.average_rating.round(1) %></li>
-    <li><%= link_to "#{@highest_rated_books.third.title}", book_path(@highest_rated_books.third.id) %>, <%= @highest_rated_books.third.average_rating.round(1) %></li>
+    <li><% if @highest_rated_books.second != nil %>
+        <%= link_to "#{@highest_rated_books.second.title}", book_path(@highest_rated_books.second.id) %>,
+        <%= @highest_rated_books.second.average_rating.round(1) %>
+        <% end %>
+    </li>
+    <li><% if @highest_rated_books.third != nil  %>
+      <%= link_to "#{@highest_rated_books.third.title}", book_path(@highest_rated_books.third.id) %>,
+      <%= @highest_rated_books.third.average_rating.round(1) %>
+      <% end %>
+  </li>
   </ol>
 </section>
 <section id="worst_rated_books">
   <h1>Worst Rated Books</h1>
   <ol>
     <li><%= link_to "#{@worst_rated_books.first.title}", book_path(@worst_rated_books.first.id) %>, <%= @worst_rated_books.first.average_rating.round(1) %></li>
-    <li><%= link_to "#{@worst_rated_books.second.title}", book_path(@worst_rated_books.second.id) %>, <%= @worst_rated_books.second.average_rating.round(1) %></li>
-    <li><%= link_to "#{@worst_rated_books.third.title}", book_path(@worst_rated_books.third.id) %>, <%= @worst_rated_books.third.average_rating.round(1) %></li>
+    <li><% if @worst_rated_books.second != nil %>
+      <%= link_to "#{@worst_rated_books.second.title}", book_path(@worst_rated_books.second.id) %>,
+       <%= @worst_rated_books.second.average_rating.round(1) %>
+       <% end %>
+     </li>
+    <li><% if @worst_rated_books.third %>
+      <%= link_to "#{@worst_rated_books.third.title}", book_path(@worst_rated_books.third.id) %>,
+      <%= @worst_rated_books.third.average_rating.round(1) %>
+      <% end %>
+    </li>
   </ol>
 </section>
 <section id="users_with_most_reviews">
@@ -52,9 +68,11 @@
 <ul id="info-<%= book.id%>">
   <section class="book_display<% "#{num}"%>">
   <li><%= link_to "#{book.title.titlecase}", book_path(book.id) %></li>
+
   <li>Author(s): <% book.authors.each do |author| %>
     <%= link_to "#{author.name}", author_path(author) %><br/>
     <% end %>
+
   </li>
   <li>Pages: <%= book.pages %></li>
   <li>Year Published: <%= book.year_pub %></li>
