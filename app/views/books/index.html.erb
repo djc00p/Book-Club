@@ -1,11 +1,20 @@
+<div class="index_container">
+<section class="sorting_container">
+  <section class="rating_container">
 <%= link_to "Sort by Highest Rated Book", books_path(sort: "high_rating") %>
 <%= link_to "Sort by Lowest Rated Book", books_path(sort: "low_rating") %>
+</section>
+<section class="pages_container">
 <%= link_to "Sort by Most Amount of Pages", books_path(sort: "most_pages") %>
 <%= link_to "Sort by Least Amount of Pages", books_path(sort: "least_pages") %>
+</section>
+<section class="reviews_container">
 <%= link_to "Sort by Most Amount of Reviews", books_path(sort: "most_reviews") %>
 <%= link_to "Sort by Least Amount of Reviews", books_path(sort: "least_reviews") %>
-<%= link_to "Add New Book", new_book_path %>
+</section>
+</section>
 
+<section class="statistics_container">
 <section id="highest_rated_books">
   <h1>Highest Rated Books</h1>
   <ol>
@@ -46,17 +55,24 @@
     <li><%= link_to "#{@most_ratings.keys[-3]}", "/user/#{@most_ratings.keys[-3]}" %>, <%= @most_ratings.values[-3] %></li>
   </ul>
 </section>
+</section>
+
+<section class="new_book_link">
+<%= link_to "Add New Book", new_book_path %>
+</section>
+
+<section class="book_index_container">
   <% num = 1 %>
 <% @books.each do |book| %>
+<section class="book_info_container">
 <ul id="info-<%= book.id%>">
-  <% %>
-
   <section class="book_display<% "#{num}"%>">
   <li><%= link_to "#{book.title.titlecase}", book_path(book.id) %></li>
-  <li>Author(s): <% list = book.authors %>
-    <% list.each do |author| %>
-    <%= link_to "#{author.name}", author_path(author) %>
-    <% end.join(", ").html_safe %>
+
+  <li>Author(s): <% book.authors.each do |author| %>
+    <%= link_to "#{author.name}", author_path(author) %><br/>
+    <% end %>
+
   </li>
   <li>Pages: <%= book.pages %></li>
   <li>Year Published: <%= book.year_pub %></li>
@@ -67,3 +83,5 @@
 <% num += 1 %>
 </section>
 <% end %>
+</section>
+</div>

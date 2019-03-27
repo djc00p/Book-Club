@@ -16,10 +16,6 @@ class Book < ApplicationRecord
     book.reviews.order(rating: direction).limit(3)
   end
 
-  def lists_authors(book)
-    book.authors.pluck(:name)
-  end
-
   def high_rating(book)
     book.reviews.order(rating: :desc).first
   end

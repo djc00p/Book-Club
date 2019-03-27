@@ -105,7 +105,7 @@ RSpec.describe "book show page" do
 
         visit book_path(@book_1)
 
-        within ".show_top_reviews" do
+        within ".top_3" do
           expect(page).to have_content("#{@review_3.title}")
           expect(page).to have_content("#{@review_7.title}")
           expect(page).to have_content("#{@review_2.title}")
@@ -122,7 +122,7 @@ RSpec.describe "book show page" do
 
         visit book_path(@book_1)
 
-        within ".show_bottom_reviews" do
+        within ".bottom_3" do
           expect(page).to have_content("#{@review_4.title}")
           expect(page).to have_content("#{@review_5.title}")
           expect(page).to have_content("#{@review_1.title}")

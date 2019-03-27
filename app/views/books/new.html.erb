@@ -1,22 +1,22 @@
 <%= form_for @book do |f| %>
-<p><%= f.label :title %>
-  <%= f.text_field :title %>
+<p id="new_book_form"><%= f.label :title %>
+  <%= f.text_field :title %></p>
 
-  Author(s) <input type="text" name="book[author]"
-  id="book_authors" required="true">
+  <p id="new_book_form">Author(s) <input type="text" name="book[author]"
+  id="book_authors" required="true"></p>
 
-  <%= f.label :pages %>
-  <%= f.number_field :pages %>
-
-
-  <label for="book_year_pub">Year Published</label>
-  <%= f.number_field :year_pub %>
+  <p id="new_book_form"><%= f.label :pages %>
+  <%= f.number_field :pages %></p>
 
 
-  <%= f.label :image %>
-  <%= f.text_field :image, value: nil %>
+  <p id="new_book_form"><label for="book_year_pub">Year Published</label>
+  <%= f.number_field :year_pub %></p>
 
-  <%= f.submit %>
-</p>
+
+  <p id="new_book_form"><%= f.label :image %>
+  <%= f.text_field :image, value: nil %></p>
+
+  <p id="new_book_form"><%= f.submit %></p>
+
 
 <% end %>
