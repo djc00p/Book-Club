@@ -45,10 +45,6 @@ RSpec.describe Book, type: :model do
       expect(@book_1.reviews_by_rating(@book_1, "#{direction}")).to eq([@review_4, @review_1, @review_3])
     end
 
-    it "should list all authors" do
-      expect(@book_1.lists_authors(@book_1).join(" ")).to eq("#{@author_1.name} Mary")
-    end
-
     it "checks for high_rating" do
       author = Author.create(name: "Joseph")
       book_1 = author.books.create!(title: "not a book", pages: 5, year_pub: 1980)

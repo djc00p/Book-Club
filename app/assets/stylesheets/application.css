@@ -62,3 +62,113 @@
 .splash_footer footer {
   text-align: center;
 }
+.sorting_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: peachpuff;
+}
+.rating_container {
+  display: flex;
+  flex-direction: column;
+}
+.pages_container {
+  display: flex;
+  flex-direction: column;
+}
+.reviews_container {
+  display: flex;
+  flex-direction: column;
+}
+.statistics_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: peachpuff;
+
+}
+#highest_rated_books {
+  display: flex;
+  flex-direction: column;
+}
+#highest_rated_books ol {
+  padding-inline-start: 0px;
+}
+#highest_rated_books h1 {
+  margin-bottom: 0px;
+}
+#worst_rated_books {
+  display: flex;
+  flex-direction: column;
+}
+#worst_rated_books ol {
+  padding-inline-start: 0px;
+}
+#worst_rated_books h1 {
+  margin-bottom: 0px;
+}
+#users_with_most_reviews {
+  display: flex;
+  flex-direction: column;
+}
+#users_with_most_reviews ol {
+  padding-inline-start: 0px;
+}
+#review_sort {
+  text-align: center;
+}
+
+#users_with_most_reviews h1 {
+  margin-bottom: 0px;
+}
+.new_book_link {
+  text-align: center;
+}
+.book_index_container {
+  display: flex;
+  flex-flow: wrap;
+}
+.book_info_container {
+  display: flex;
+  width: 30%;
+  border: 1px solid black;
+  margin: 15px;
+}
+.book_info_container img {
+  height: 150px;
+  width: 100px;
+
+}.book_info_container ul {
+  list-style: none;
+}
+#review {
+  border: 1px solid black;
+  margin: 15px 0;
+  padding-bottom: 10px;
+}
+.show_headings {
+  text-align: center;
+}
+.book_show_header {
+  text-align: center;
+}
+.top_3 {
+  display: flex;
+  justify-content: space-around;
+}
+.bottom_3 {
+  display: flex;
+  justify-content: space-around;
+}
+.link_to_review {
+  text-align: center;
+  font-size: 25px;
+}
+.review_info {
+  border: 2px solid black;
+  margin: 15px 0;
+  padding-bottom: 10px;
+}
+#new_book_form {
+  margin-left: 20px;
+}

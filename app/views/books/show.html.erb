@@ -1,19 +1,23 @@
+<div class="book_show_header">
 <h1><%= @book.title.titlecase %></h1>
 <section>
   <section class="book_image">
     <img src="<%= @book.image %>" alt="image">
   </section>
-  <ul>
-    <li>Author(s): <% @book.lists_authors(@book).each do |author| %>
-      <%= link_to "#{author}", author_path(author) %>
-      <% end.join(", ").html_safe %>
-    </li>
-    <li>Pages: <%= @book.pages %></li>
-    <li>Year Published: <%= @book.year_pub %></li>
-  </ul>
+
+    Author(s): <% @book.authors.each do |author| %>
+
+      <%= link_to "#{author.name}", author_path(author) %><br/>
+      <% end %>
+
+    Pages: <%= @book.pages %><br/>
+    Year Published: <%= @book.year_pub %>
+
 </section>
+</div>
 <section class="show_reviews">
-  <h2>Reviews</h2>
+  <h2 class="show_headings">Reviews</h2>
+
   <% @book.reviews.each do |review| %>
   <section id="review">
     <h3><%= review.title %></h3>
@@ -24,37 +28,44 @@
   <% end %>
 </section>
 
-<h2>Top Three Reviews</h2>
-<section  class="show_top_reviews">
-  <% @book.reviews_by_rating(@book, :desc).each do |review| %>
-    <ul>
-      <li><%= review.title %></li>
-      <li>Rating: <%= review.rating %></li>
-      <li>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></li>
-    </ul>
-  <% end %>
-</section>
 
-<h2>Bottom Three Reviews</h2>
-<section class="show_bottom_reviews">
-  <% @book.reviews_by_rating(@book, :asc).each do |review| %>
+<h2 class="show_headings">Top Three Reviews</h2>
+<div class="top_3">
+<% @book.reviews_by_rating(@book, :desc).each do |review| %>
+<section  class="show_top_reviews">
     <ul>
       <li><%= review.title %></li>
       <li>Rating: <%= review.rating %></li>
       <li>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></li>
     </ul>
+  </section>
+<% end %>
+</div>
+
+<h2 class="show_headings">Bottom Three Reviews</h2>
+<div class="bottom_3">
+  <% @book.reviews_by_rating(@book, :asc).each do |review| %>
+  <section class="show_bottom_reviews">
+    <ul>
+      <li><%= review.title %></li>
+      <li>Rating: <%= review.rating %></li>
+      <li>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></li>
+    </ul>
+  </section>
   <% end %>
-</section>
+</div>
 
 <section class="show_avg_rating">
-  <h2>Average Rating: <%= @book.avg_rating(@book) %></h2>
+  <h2 class="show_headings">Average Rating: <%= @book.avg_rating(@book) %></h2>
 </section>
 
-<%= link_to "Add a new Review", new_book_review_path(@book) %>
+<div class="link_to_review">
+  <%= link_to "Add a new Review", new_book_review_path(@book) %>
+</div>
 
 <section class="book_show_info">
   <% @book.reviews.each do |review| %>
-  <section >
+  <section id="review">
     <p>Review title: <%= review.title %>
     <p>Reviewer: <%= link_to "#{review.user_name}", "/user/#{review.user_name}" %></p>
     <p>Review rating: <%= review.rating %>
@@ -63,4 +74,6 @@
   <% end %>
 </section>
 
+<div class="link_to_review">
 <%= link_to "Delete Book", book_path(@book.id), method: :delete, data: { confirm: "Are you sure?"} %>
+</div>

@@ -1,18 +1,22 @@
 <% @books.each do |book| %>
   <section id="author_show_book<%= book.id %>">
-    <%= link_to "#{book.title}", book_path(book.id)  %><br/>
+    <h2 class="show_headings"><%= link_to "#{book.title}", book_path(book.id)  %></h2><br/>
     <% counter = 1 %>
     <% if book.authors.count > 1 %>
       <p>Additional Author(s): <%= book.authors[counter].name %></p>
       <% counter += 1 %>
     <%  end %>
-    <%= book.pages %><br/>
-    <%= book.year_pub %><br/>
-    <img src="<%= book.image %>"><br/>
+    <section class="book_show_header">
+      <img src="<%= book.image %>"><br/>
+    Pages: <%= book.pages %><br/>
+    Year Published :<%= book.year_pub %><br/>
+  </section>
     <% if book.high_rating(book) %>
+      <h2 class="show_headings">Top Review</h2>
+      <section id="review">
       <%= book.high_rating(book).title %><br/>
       <%= book.high_rating(book).rating %><br/>
-      <%= link_to "#{book.high_rating(book).user_name}", "/user/#{book.high_rating(book).user_name}" %><br/>
+      <%= link_to "#{book.high_rating(book).user_name}", "/user/#{book.high_rating(book).user_name}" %><br/></section>
     <% else %>
       <p>Book has no ratings</p><br/>
     <% end %>
