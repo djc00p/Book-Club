@@ -73,7 +73,7 @@ describe "on the user show page" do
     visit "/user/#{@review_1.user_name}"
 
     click_link "Sort Reviews in Descending Order"
-# save_and_open_page
+#   
     expect(page.all("ul")[0]).to have_content("Review Title: #{@review_3.title}")
     expect(page.all("ul")[1]).to have_content("Review Title: #{@review_4.title}")
     expect(page.all("ul")[2]).to have_content("Review Title: #{@review_1.title}")
@@ -83,7 +83,7 @@ describe "on the user show page" do
     visit "/user/#{@review_1.user_name}"
 
     click_link "Sort Reviews in Ascending Order"
-# save_and_open_page
+#   
     expect(page.all("ul")[0]).to have_content("Review Title: #{@review_2.title}")
     expect(page.all("ul")[1]).to have_content("Review Title: #{@review_1.title}")
     expect(page.all("ul")[2]).to have_content("Review Title: #{@review_4.title}")

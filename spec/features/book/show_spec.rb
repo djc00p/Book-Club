@@ -43,7 +43,7 @@ RSpec.describe "book show page" do
 
     it "shows an image" do
       visit book_path(@book_1)
-      # save_and_open_page
+      #
       within ".book_image" do
         expect(page).to have_css("img[src*='#{@book_1.image}']")
       end
@@ -145,14 +145,14 @@ RSpec.describe "book show page" do
       end
 
       it "should let a user create a new review" do
-
         visit book_path(@book_1)
 
         expect(page).to have_link("Add a new Review")
 
+
         click_link "Add a new Review"
 
-        expect(current_path).to eq(new_book_review_path(@book_1.id))
+        expect(current_path).to eq(new_book_review_path(@book_1))
 
         fill_in "Title", with: "Great"
         fill_in "Rating", with: 4
@@ -172,7 +172,7 @@ RSpec.describe "book show page" do
 
       it "should not let a user enter partial review data" do
 
-        visit book_path(@book_1)
+        visit book_path(@book_1.id)
 
         expect(page).to have_link("Add a new Review")
 
@@ -256,7 +256,7 @@ RSpec.describe "book show page" do
 
       it "should link each author to their show page" do
         visit book_path(@book_1)
-        # save_and_open_page
+
         click_link "Jake"
 
         expect(current_path).to eq(author_path(@author_2))

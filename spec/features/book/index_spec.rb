@@ -84,7 +84,7 @@ RSpec.describe "book index page", type: :feature do
       expect(page).to have_link("Sort by Highest Rated Book")
 
       click_link "Sort by Highest Rated Book"
-
+      
       expect(page.all("ul")[1]).to have_content(@book_2.title)
       expect(page.all("ul")[2]).to have_content("In The Wind")
       expect(page.all("ul")[3]).to have_content(@book_3.title)

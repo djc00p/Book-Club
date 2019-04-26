@@ -33,7 +33,7 @@ describe "on the author's show page" do
         expect(page).to have_content(book_2.year_pub)
       end
       within "#author_show_book#{book_3.id}" do
-        # save_and_open_page
+        #   
         expect(page).to have_content(book_3.title)
         expect(page).to have_content(book_3.pages)
         expect(page).to have_content(book_3.year_pub)
@@ -103,7 +103,7 @@ describe "on the author's show page" do
       expect(page).to_not have_content(@author_1.name)
       expect(page).to_not have_content(@book_1.title)
       expect(page).to_not have_content(@book_2.title)
-      # save_and_open_page
+      #   
     end
   end
 end

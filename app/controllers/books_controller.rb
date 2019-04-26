@@ -10,7 +10,7 @@ class BooksController < ApplicationController
     case params[:sort]
     when "high_rating"
       @books = @highest_rated_books
-      render :index
+      render :index #dont need becuase always renders index
     when "low_rating"
       @books = @worst_rated_books
       render :index
@@ -29,7 +29,6 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
-    # binding.pry
   end
 
   def show

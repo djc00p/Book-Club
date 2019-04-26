@@ -1,13 +1,13 @@
 class ReviewsController < ApplicationController
   def new
-    @book = Book.find(params[:book_id])
+    @book = Book.find(params[:id])
     @review = Review.new
   end
 
   def create
     edited_review_params = review_params
     edited_review_params[:user_name] = review_params[:user_name].titleize
-    @book = Book.find(params[:book_id])
+    @book = Book.find(params[:id])
     @review = @book.reviews.new(edited_review_params)
     if @review.save
       redirect_to book_path(@book)

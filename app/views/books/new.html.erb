@@ -8,8 +8,7 @@
   <p id="new_book_form"><%= f.label :pages %>
   <%= f.number_field :pages %></p>
 
-
-  <p id="new_book_form"><label for="book_year_pub">Year Published</label>
+  <p><label for="book_year_pub">Year Published</label>
   <%= f.number_field :year_pub %></p>
 
 
@@ -17,6 +16,5 @@
   <%= f.text_field :image, value: nil %></p>
 
   <p id="new_book_form"><%= f.submit %></p>
-
 
 <% end %>

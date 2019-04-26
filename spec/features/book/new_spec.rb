@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe "New book page" do
   describe "when i visit book index page" do
@@ -22,7 +22,7 @@ RSpec.describe "New book page" do
       visit  books_path
 
       click_link "Add New Book"
-
+        
       fill_in 'Title', with: 'must be nice'
       fill_in 'book[author]', with: "james, jack"
       fill_in 'Pages', with: 345
@@ -45,7 +45,7 @@ RSpec.describe "New book page" do
 
     it "should not add exisiting book" do
       visit  books_path
-      # save_and_open_page
+      #   
       click_link "Add New Book"
 
       fill_in 'Title', with: 'In The Wind'
