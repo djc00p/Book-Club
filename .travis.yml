@@ -1,6 +1,9 @@
 language: ruby
 rbenv:
  -  2.4.1
-
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database Book-Club_test;' -U postgres
 script:
  - bundle exec rake db:create
