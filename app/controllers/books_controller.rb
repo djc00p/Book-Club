@@ -6,7 +6,6 @@ class BooksController < ApplicationController
     @highest_rated_books = Book.rated_books(desc)
     @worst_rated_books = Book.rated_books(asc)
     @most_ratings = Review.total_count
-binding.pry
     case params[:sort]
     when "high_rating"
       @books = @highest_rated_books
